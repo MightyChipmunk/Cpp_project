@@ -22,10 +22,10 @@ int main(void) {
 			index++;
 		}
 		else if (choice == 2) {
-			func::DepositMenu(acc);
+			func::DepositMenu(acc, index);
 		}
 		else if (choice == 3) {
-			func::WithdrawMenu(acc);
+			func::WithdrawMenu(acc, index);
 		}
 		else if (choice == 4) {
 			func::Print(acc, index);

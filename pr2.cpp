@@ -14,43 +14,40 @@ namespace func {
 		cout << "5. 프로그램 종료" << endl;
 		cout << "선택 ";
 	}
-	void GetAccount(int &num, char* name, int &money) {
+	void GetAccount(int &num, char *name, int &money) {
 		cout << "[계좌개설]" << endl;
 		cout << "계좌ID: "; cin >> num;
 		cout << "이름: "; cin >> name;
 		cout << "입금액: "; cin >> money;
+		cout << endl;
 	}
-	void DepositMenu(Account **acc) {
+	void DepositMenu(Account **acc, int index) {
 		int num, money;
 		cout << "[입금]" << endl;
 		cout << "계좌ID: "; cin >> num;
-		cout << "입금액: "; cin >> money;
-		for (int i = 0; i < MAX; i++) {
+		for (int i = 0; i < index; i++) {
 			if (acc[i]->GetNum() == num) {
+				cout << "입금액: "; cin >> money;
 				acc[i]->AddMoney(money);
-				cout << "입금완료" << endl;
-				break;
-			}
-			else {
-				cout << "잘못된 ID입니다." << endl;
+				cout << "입금완료" << endl << endl;
+				return;
 			}
 		}
+		cout << "잘못된 ID입니다." << endl << endl;
 	}
-	void WithdrawMenu(Account **acc) {
+	void WithdrawMenu(Account **acc, int index) {
 		int num, money;
 		cout << "[출금]" << endl;
 		cout << "계좌ID: "; cin >> num;
-		cout << "출금액: "; cin >> money;
-		for (int i = 0; i < MAX; i++) {
+		for (int i = 0; i < index; i++) {
 			if (acc[i]->GetNum() == num) {
+				cout << "출금액: "; cin >> money;
 				acc[i]->SubMoney(money);
-				cout << "출금완료" << endl;
-				break;
-			}
-			else {
-				cout << "잘못된 ID입니다." << endl;
+				cout << "출금완료" << endl << endl;
+				return;
 			}
 		}
+		cout << "잘못된 ID입니다." << endl << endl;
 	}
 	void Print(Account **acc, int index) {
 		for (int i = 0; i < index; i++) {
@@ -63,7 +60,7 @@ namespace func {
 Account::Account(int num, char* name, int money) : Accnum(num), Accmoney(money) {
 	int len = strlen(name) + 1;
 	Accname = new char[len];
-	strcpy_s(Accname, MAX, name);
+	strcpy_s(Accname, len, name);
 }
 
 Account::Account() {
@@ -81,10 +78,10 @@ void Account::AddMoney(int num) {
 void Account::SubMoney(int num) {
 	Accmoney -= num;
 }
-void Account::PrintAccount() const {
+void Account::PrintAccount() {
 	cout << "계좌ID: " << Accnum << endl;
 	cout << "이름: " << Accname << endl;
-	cout << "잔액: " << Accmoney << endl;
+	cout << "잔액: " << Accmoney << endl << endl;
 }
 Account::~Account() {
 	delete[] Accname;
