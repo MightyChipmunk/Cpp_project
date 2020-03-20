@@ -1,134 +1,92 @@
 #include <iostream>
 #include <cstring>
+#include "pr2.h"
 #define MAX 100
 using namespace std;
 
 namespace func {
 	void ShowMenu() {
 		cout << "-----Menu-----" << endl;
-		cout << "1. ê³„ì¢Œê°œì„¤" << endl;
-		cout << "2. ì…ê¸ˆ" << endl;
-		cout << "3. ì¶œê¸ˆ" << endl;
-		cout << "4. ê³„ì¢Œì •ë³´ ì „ì²´ ì¶œë ¥" << endl;
-		cout << "5. í”„ë¡œê·¸ë¨ ì¢…ë£Œ" << endl;
-		cout << "ì„ íƒ ";
+		cout << "1. °èÁÂ°³¼³" << endl;
+		cout << "2. ÀÔ±İ" << endl;
+		cout << "3. Ãâ±İ" << endl;
+		cout << "4. °èÁÂÁ¤º¸ ÀüÃ¼ Ãâ·Â" << endl;
+		cout << "5. ÇÁ·Î±×·¥ Á¾·á" << endl;
+		cout << "¼±ÅÃ ";
 	}
 	void GetAccount(int &num, char* name, int &money) {
-		cout<<"[ê³„ì¢Œê°œì„¤]"<<endl;
-		cout<<"ê³„ì¢ŒID: "; cin>>num;
-		cout<<"ì´ë¦„: "; cin>>name;
-		cout<<"ì…ê¸ˆì•¡: "; cin>>money;
+		cout << "[°èÁÂ°³¼³]" << endl;
+		cout << "°èÁÂID: "; cin >> num;
+		cout << "ÀÌ¸§: "; cin >> name;
+		cout << "ÀÔ±İ¾×: "; cin >> money;
 	}
 	void DepositMenu(Account **acc) {
 		int num, money;
-		cout<<"[ì…ê¸ˆ]"<< endl;
-		cout<<"ê³„ì¢ŒID: "; cin>>num;
-		cout<<"ì…ê¸ˆì•¡: "; cin>>money;
+		cout << "[ÀÔ±İ]" << endl;
+		cout << "°èÁÂID: "; cin >> num;
+		cout << "ÀÔ±İ¾×: "; cin >> money;
 		for (int i = 0; i < MAX; i++) {
-			if (acc[i]->Accnum == id) {
+			if (acc[i]->GetNum() == num) {
 				acc[i]->AddMoney(money);
-				cout<<"ì…ê¸ˆì™„ë£Œ"<<endl;
+				cout << "ÀÔ±İ¿Ï·á" << endl;
 				break;
 			}
 			else {
-				cout<<"ì˜ëª»ëœ IDì…ë‹ˆë‹¤."<<endl;
+				cout << "Àß¸øµÈ IDÀÔ´Ï´Ù." << endl;
 			}
 		}
 	}
 	void WithdrawMenu(Account **acc) {
 		int num, money;
-		cout<<"[ì¶œê¸ˆ]"<<endl;
-		cout<<"ê³„ì¢ŒID: "; cin>>num;
-		cout<<"ì¶œê¸ˆì•¡: "; cin>>money;
+		cout << "[Ãâ±İ]" << endl;
+		cout << "°èÁÂID: "; cin >> num;
+		cout << "Ãâ±İ¾×: "; cin >> money;
 		for (int i = 0; i < MAX; i++) {
-			if (acc[i]->Accnum == id) {
+			if (acc[i]->GetNum() == num) {
 				acc[i]->SubMoney(money);
-				cout<<"ì¶œê¸ˆì™„ë£Œ"<<endl;
+				cout << "Ãâ±İ¿Ï·á" << endl;
 				break;
 			}
 			else {
-				cout<<"ì˜ëª»ëœ IDì…ë‹ˆë‹¤."<<endl;
+				cout << "Àß¸øµÈ IDÀÔ´Ï´Ù." << endl;
 			}
 		}
 	}
-	void Print(Account **acc) {
+	void Print(Account **acc, int index) {
 		for (int i = 0; i < index; i++) {
 			acc[i]->PrintAccount();
 		}
 	}
 }
 
-class Account {
-	int Accnum;
-	char* Accname;
-	int Accmoney;
-	
-public:
-	Account(int num, char* name, int money) : Accnum(num), Accmoney(money) {
-		int len = strlen(name) + 1;
-		Accname = new char[len];
-		strcpy(Accname, name);
-	}
-	
-	Account() {
-		Accnum = 0;
-		Accname = NULL;
-		Accmoney = 0;
-	} //ê°ì²´ ë°°ì—´ ì„ ì–¸ì„ ìœ„í•œ ìƒì„±ì
-	
-	void AddMoney(int num) {
-		Accmoney += num;
-	}
-	
-	void SubMoney(int num) {
-		Accmoney -= num;
-	}
-	
-	void PrintAccount() const {
-		cout<<"ê³„ì¢ŒID: "<<Accnum<<endl;
-		cout<<"ì´ë¦„: "<<Accname<<endl;
-		cout<<"ì”ì•¡: "<<Accmoney<<endl;
-	}
-	
-	~Account() {
-		delete[] Accname;
-	}
-};
 
-int main(void) {
-	Account *acc[MAX];
-	int index = 0;
-
-	while (1) {
-		func::ShowMenu();
-		
-		int choice;
-		cin >> choice;
-
-		if (choice == 1) {
-			int num, money;
-			char* name = new char[MAX];
-			func::GetAccount(num, name, money);
-			acc[index] = new Account(num, name, money);
-			index++;
-			cout<<endl;
-		}
-		else if (choice == 2) {
-			func::DepositMenu(acc);
-			cout<<endl;
-		}
-		else if (choice == 3) {
-			func::WithdrawMenu(acc);
-			cout<<endl;
-		}
-		else if (choice == 4) {
-			Print(acc);
-			cout<<endl;
-		}
-		else if (choice == 5) {
-			break;
-		}
-	}
-
-	return 0;
+Account::Account(int num, char* name, int money) : Accnum(num), Accmoney(money) {
+	int len = strlen(name) + 1;
+	Accname = new char[len];
+	strcpy_s(Accname, MAX, name);
 }
+
+Account::Account() {
+	Accnum = 0;
+	Accname = NULL;
+	Accmoney = 0;
+} //°´Ã¼ ¹è¿­ ¼±¾ğÀ» À§ÇÑ »ı¼ºÀÚ
+
+int Account::GetNum() {
+	return Accnum;
+}
+void Account::AddMoney(int num) {
+	Accmoney += num;
+}
+void Account::SubMoney(int num) {
+	Accmoney -= num;
+}
+void Account::PrintAccount() const {
+	cout << "°èÁÂID: " << Accnum << endl;
+	cout << "ÀÌ¸§: " << Accname << endl;
+	cout << "ÀÜ¾×: " << Accmoney << endl;
+}
+Account::~Account() {
+	delete[] Accname;
+}
+
