@@ -78,7 +78,7 @@ void Account::AddMoney(int num) {
 void Account::SubMoney(int num) {
 	Accmoney -= num;
 }
-void Account::PrintAccount() {
+void Account::PrintAccount() const {
 	cout << "°èÁÂID: " << Accnum << endl;
 	cout << "ÀÌ¸§: " << Accname << endl;
 	cout << "ÀÜ¾×: " << Accmoney << endl << endl;

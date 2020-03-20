@@ -16,7 +16,7 @@ public:
 	int GetNum();
 	void AddMoney(int num);
 	void SubMoney(int num);
-	void PrintAccount();
+	void PrintAccount() const;
 	~Account();
 };
 
