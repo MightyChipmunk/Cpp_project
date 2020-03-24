@@ -1,6 +1,6 @@
 #include <iostream>
 #include <cstring>
-#include "pr2.h"
+#include "pr3.h"
 #define MAX 100
 using namespace std;
 
