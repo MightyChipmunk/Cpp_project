@@ -63,6 +63,12 @@ Account::Account(int num, char* name, int money) : Accnum(num), Accmoney(money) 
 	strcpy_s(Accname, len, name);
 }
 
+Account::Account(const Account &copy) :Accnum(copy.Accnum), Accmoney(copy.Accmoney) {
+	int len = strlen(copy.Accname) + 1;
+	Accname = new char[len];
+	strcpy_s(Accname, len, copy.Accname);
+} //복사 생성자 추가
+
 Account::Account() {
 	Accnum = 0;
 	Accname = NULL;
