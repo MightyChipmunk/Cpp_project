@@ -12,11 +12,12 @@ private:
 	
 public:
 	Account(int num, char* name, int money);
+	Account::Account(const Account &copy);
 	Account();
-	int GetNum();
+	int GetNum() const; //const로 선언이 가능한 함수
 	void AddMoney(int num);
 	void SubMoney(int num);
-	void PrintAccount() const;
+	void PrintAccount() const; //const로 선언이 가능한 함수
 	~Account();
 };
 
