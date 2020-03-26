@@ -75,9 +75,9 @@ Account::Account() {
 	Accmoney = 0;
 } //객체 배열 선언을 위한 생성자
 
-int Account::GetNum() {
+int Account::GetNum() const {
 	return Accnum;
-}
+} //const로 선언이 가능한 함수
 void Account::AddMoney(int num) {
 	Accmoney += num;
 }
@@ -88,7 +88,7 @@ void Account::PrintAccount() const {
 	cout << "계좌ID: " << Accnum << endl;
 	cout << "이름: " << Accname << endl;
 	cout << "잔액: " << Accmoney << endl << endl;
-}
+} //const로 선언이 가능한 함수
 Account::~Account() {
 	delete[] Accname;
 }
