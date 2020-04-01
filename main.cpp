@@ -5,30 +5,24 @@
 using namespace std;
 
 int main(void) {
-	Account *acc[MAX];
-	int index = 0;
-
+	AccountHandler Handler;
 	while (1) {
-		func::ShowMenu();
+		Handler.ShowMenu();
 
 		int choice;
 		cin >> choice;
 
 		if (choice == 1) {
-			int num, money;
-			char* name = new char[MAX];
-			func::GetAccount(num, name, money);
-			acc[index] = new Account(num, name, money);
-			index++;
+			Handler.GetAccount();
 		}
 		else if (choice == 2) {
-			func::DepositMenu(acc, index);
+			Handler.DepositMenu();
 		}
 		else if (choice == 3) {
-			func::WithdrawMenu(acc, index);
+			Handler.WithdrawMenu();
 		}
 		else if (choice == 4) {
-			func::Print(acc, index);
+			Handler.Print();
 		}
 		else if (choice == 5) {
 			break;
