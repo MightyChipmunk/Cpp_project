@@ -102,7 +102,6 @@ void AccountHandler::Print() {
 }
 AccountHandler::~AccountHandler() {
 	for (int i = 0; i < index; i++) 
-		delete[] acc[i]; 
-	delete[] acc;
+		delete acc[i]; 
 }
 //AccountHandler 멤버들
