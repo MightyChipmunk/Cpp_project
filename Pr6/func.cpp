@@ -56,7 +56,7 @@ void NormalAccount::AddMoney(int num) {
 	Account::AddMoney((int)(Interest * GetMoney() * 0.01));
 }
 //NormalAccount 멤버들
-HighCreditAccount::HighCreditAccount(int num, char* name, int money, int _interest, int _grade) : Account(num, name, money), Interest(_interest), Grade(_grade) {}
+HighCreditAccount::HighCreditAccount(int num, char* name, int money, int interest, int _grade) : NormalAccount(num, name, money, interest), Grade(_grade) {}
 
 void HighCreditAccount::AddMoney(int num) {
 	int bonus;
@@ -69,11 +69,10 @@ void HighCreditAccount::AddMoney(int num) {
 	else if (Grade == 3) {
 		bonus = 2;
 	}
-	else {
+	else 
 		cout << "잘못된 입력입니다." << endl;
-	}
-	Account::AddMoney(num);
-	Account::AddMoney((int)((Interest + bonus) * GetMoney() * 0.01));
+	NormalAccount::AddMoney(num);
+	Account::AddMoney((int)(bonus * GetMoney() * 0.01));
 }
 //HighCreditAccount 멤버들
 AccountHandler::AccountHandler() {

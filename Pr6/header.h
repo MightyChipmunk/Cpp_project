@@ -29,12 +29,11 @@ public:
 	void AddMoney(int num);
 };
 
-class HighCreditAccount : public Account {
+class HighCreditAccount : public NormalAccount {
 private:
-	int Interest;
 	int Grade;
 public:
-	HighCreditAccount(int num, char* name, int money, int _interest, int _grade);
+	HighCreditAccount(int num, char* name, int money, int interest, int _grade);
 	void AddMoney(int num);
 };
 
